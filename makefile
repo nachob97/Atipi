@@ -1,3 +1,3 @@
-main: main.c
-	gcc -Wall -g -o main main.c
+main: main.cpp
+	gcc -Wall -g -o main main.cpp
 	#comentario random
