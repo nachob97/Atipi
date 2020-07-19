@@ -1,22 +1,27 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdio.h>
+#include <errno.h>
+#include "context.hpp"
 
 using namespace std;
 
-int* readFile(string path) {
+int** readFile(string path, int cols, int rows, int range) {
 
     string line;
-    int cols, rows, range;
-    ifstream infile(path);
-    stringstream ss;
+    ifstream infile(path, ios::in | ios::binary);
+    streambuf* ss = infile.rdbuf();
     if (infile.is_open()) {
         getline(infile, line);
         //aca iria condicion de line= "P5 O P6"
-        ss << infile.rdbuf();
-        ss >> cols >> rows;
-        int img[cols][rows];
-        ss >> range;
+        getline(infile, line);// esto es el comentario
+        getline(infile, line);
+        getline(infile, line);
+        int** img = new int* [cols];
+        for (int i = 0; i < cols; i++) {
+            img[i] = new int[rows];
+        }
         //------------------- CANTIDAD DE COLUMNAS, FILAS Y RANGO
         cout << cols << endl;
         cout << rows << endl;
@@ -25,25 +30,64 @@ int* readFile(string path) {
         unsigned char c;
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
-                ss >> c;
-                cout << c << " "; // caracter del pixel
-                cout << int(c) << " "; //valor del caracter en la tabla ASCII
-                img[i][j] = int(c);
+                //infile.read(&c, sizeof(char));
+                c= char(ss->sbumpc());
+                img[i][j] = int(c);//ss->sbumpc();
             }
-            cout << endl;
         }
-        return *img;
-        /*  for(int i = 0; i < rows; i++) {
-              for(int j=0;j<rows;j++){
-                  cout << img[i][j] << "  ";
-              }
-              cout << endl;
-          }*/
+        infile.close();
+        return img;
     }
-}
-int main() {
-    string path = "C:/Users/curisantiago3/Desktop/facultad/ATIPI/Imagenes-LOCO-PGM/baloons.pgm";
-    int* image = readFile(path);
+    else cout << "ERROR ABRIENDO PGM" << endl; 
     return 0;
 }
 
+
+
+void readHead(string path,int &cols, int &rows, int &range) {
+    string line;
+    ifstream in_file(path);
+    if (in_file.is_open()) {
+        getline(in_file, line);
+        //aca iria condicion de line= "P5 O P6"
+        getline(in_file, line);// esto es el comentario
+        getline(in_file, line, ' ');
+        cols = stoi(line);
+        getline(in_file, line);
+        rows = stoi(line);
+        getline(in_file, line);
+        range = stoi(line);
+        in_file.close();
+    }
+    else
+        cout << "ERROR" << endl;
+}
+
+
+void createImage(int** image, int cols, int rows) {
+    FILE* pgmimg;
+    pgmimg = fopen("foto_ReadFile.pgm", "wb");
+    fprintf(pgmimg, "P2\n"); 
+    fprintf(pgmimg, "%d %d\n", cols, rows); 
+    fprintf(pgmimg, "255\n"); 
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            fprintf(pgmimg, "%d ", image[i][j]);
+        }
+        fprintf(pgmimg, "\n");
+    }
+    fclose(pgmimg);
+}
+
+int main() {
+    string path = "./ImgDUDE-M-arioSimetrico/Img20M0.05.pgm";
+    int cols, rows, range;
+    readHead(path, cols, rows, range);
+    int** image = readFile(path, cols, rows, range);
+    createImage(image, cols,rows); //test de que carga bien la imagen
+    Context* cont = new Context(image, 0, 0, 4);//valores de prueba para contexto
+    //image = cont->getContexto();
+    cout << "CONTEXTO" << endl;
+    //cout << image[1][1] << endl;
+    return 0;
+}
