@@ -3,4 +3,8 @@
 ################################################################################
 
 /.vs
+Atipi.code-workspace
 /ImgDUDE-M-arioSimetrico
+context.o
+main
+readFile.o
