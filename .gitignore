@@ -8,3 +8,5 @@ Atipi.code-workspace
 context.o
 main
 readFile.o
+handlerContext.o
+main.o

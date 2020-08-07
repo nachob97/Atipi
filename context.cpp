@@ -1,6 +1,7 @@
 #include "context.hpp"
 #include <iostream>
 #include <bitset>
+#include <math.h>
 
 using namespace std;
 
