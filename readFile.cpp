@@ -1,9 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include <sstream>
-#include <stdio.h>
-#include <errno.h>
-#include "context.hpp"
+#include "readFile.hpp"
+
 
 using namespace std;
 
@@ -78,16 +76,24 @@ void createImage(int** image, int cols, int rows) {
     }
     fclose(pgmimg);
 }
+
+
 /*
 int main() {
     string path = "./ImgDUDE-M-arioSimetrico/Img20M0.05.pgm";
     int cols, rows, range;
     readHead(path, cols, rows, range);
     int** image = readFile(path, cols, rows, range);
-    createImage(image, cols,rows); //test de que carga bien la imagen
-    Context* cont = new Context(image, 0, 0, 4);//valores de prueba para contexto
+    createImage(image, cols, rows); //test de que carga bien la imagen
+    //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
+            HandlerContext* hc = HandlerContext::getInstance();
+            hc->add(cont->getExtracto());
+        }
+    }
     //image = cont->getContexto();
-    cout << "CONTEXTO" << endl;
     //cout << image[1][1] << endl;
     return 0;
 }

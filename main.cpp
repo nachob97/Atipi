@@ -1,9 +1,8 @@
 #include <iostream>
-#include "readFile.cpp"
+#include "readFile.hpp"
 #include "handlerContext.hpp"
 
-
-
+using namespace std;
 
 int main() {
     string path = "./ImgDUDE-M-arioSimetrico/Img20M0.05.pgm";
