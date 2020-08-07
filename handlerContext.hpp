@@ -2,6 +2,7 @@
 #define HANDLERCONTEXT_H
 
 #include <list> 
+#include <map> 
 
 using namespace std;
 
@@ -10,6 +11,7 @@ private:
 	HandlerContext();
 	static HandlerContext* instance;
 	list<int*> contextos;
+	map<int*, int[256]> tabla;
 public:
 	static HandlerContext* getInstance();
 	bool add(int* contexto);

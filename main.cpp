@@ -1,6 +1,6 @@
 #include <iostream>
 #include "readFile.cpp"
-
+#include "handlerContext.hpp"
 
 
 
@@ -11,7 +11,14 @@ int main() {
     readHead(path, cols, rows, range);
     int** image = readFile(path, cols, rows, range);
     createImage(image, cols, rows); //test de que carga bien la imagen
-    Context* cont = new Context(image, 0, 0, 4);//valores de prueba para contexto
+    //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
+            HandlerContext* hc = HandlerContext::getInstance();
+            hc->add(cont->getExtracto());
+        }
+    }
     //image = cont->getContexto();
     //cout << image[1][1] << endl;
     return 0;
