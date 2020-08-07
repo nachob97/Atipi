@@ -78,7 +78,7 @@ void createImage(int** image, int cols, int rows) {
     }
     fclose(pgmimg);
 }
-
+/*
 int main() {
     string path = "./ImgDUDE-M-arioSimetrico/Img20M0.05.pgm";
     int cols, rows, range;
@@ -91,3 +91,4 @@ int main() {
     //cout << image[1][1] << endl;
     return 0;
 }
+*/
