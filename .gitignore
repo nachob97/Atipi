@@ -10,3 +10,4 @@ main
 readFile.o
 handlerContext.o
 main.o
+makefile

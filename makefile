@@ -8,7 +8,7 @@ main.o: main.cpp
 handlerContext.o: handlerContext.cpp handlerContext.hpp
 	g++ -c handlerContext.cpp
 
-readFile.o: readFile.cpp
+readFile.o: readFile.cpp readFile.hpp
 	g++ -c readFile.cpp
 
 context.o: context.cpp context.hpp
