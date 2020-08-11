@@ -18,6 +18,7 @@ int main() {
             if (hc->add(cont->getExtracto())) {
                 hc->addContToDist(cont->getExtracto());
             }
+            hc->sum1(cont->getExtracto(), image[i][j]);
 
         }
     }

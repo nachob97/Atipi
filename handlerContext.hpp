@@ -18,6 +18,7 @@ public:
 	//setters
 	bool add(int* contexto);
 	bool addContToDist(int* contexto);
+	void sum1(int* contexto, int value_pixel);
 
 	
 	//getters

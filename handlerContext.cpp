@@ -60,3 +60,8 @@ bool HandlerContext::add(int* contexto) {
 	}
 	return false;
 }
+
+
+void HandlerContext::sum1(int* contexto, int value_pixel) {
+	this->distribution[contexto][value_pixel] = this->distribution[contexto][value_pixel] + 1;
+}
