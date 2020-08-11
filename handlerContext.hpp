@@ -11,7 +11,7 @@ private:
 	HandlerContext();
 	static HandlerContext* instance;
 	list<int*> contextos;
-	map<int*, int[256]> distribution;
+	map<int*, int*> distribution;
 
 	
 public:
@@ -24,7 +24,7 @@ public:
 	static HandlerContext* getInstance();
 	list<int*> getContextos();
 	bool isequal(int* contexto1, int* contexto2);
-	map<int*, int[256]> getDist();
+	map<int*, int*> getDist();
 	void remove() {}; //por ahora no se cuando eliminaría un contexto
 
 };

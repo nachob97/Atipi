@@ -18,7 +18,7 @@ list<int*> HandlerContext::getContextos() {
 	return (this->contextos);
 }
 
-map<int*, int[256]> HandlerContext::getDist() {
+map<int*, int*> HandlerContext::getDist() {
 	return this->distribution;
 }
 
@@ -33,14 +33,11 @@ bool HandlerContext::isequal(int* contexto1, int* contexto2) {
 
 
 bool HandlerContext::addContToDist(int* contexto) {
-	int counter[256];
+	int* counter = new int[256];
 	for (int i = 0; i <= 255; i++) {
 		counter[i] = 0;
 	}
-	//pair < int*, int[256]> par;// = new pair<int*, int[256]>;
-	//par = make_pair(contexto, counter);
-	this->distribution.insert(pair <int*, int[256]>(contexto, counter));
-	bool res = true;
+	bool res = this->distribution.insert(pair <int*, int*>((contexto, counter), 0)).second;
 	return res;
 }
 
