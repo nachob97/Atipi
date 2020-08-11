@@ -1,5 +1,6 @@
 #include "handlerContext.hpp"
 #include <iterator>
+//#include <utility>
 
 using namespace std;
 
@@ -17,6 +18,10 @@ list<int*> HandlerContext::getContextos() {
 	return (this->contextos);
 }
 
+map<int*, int[256]> HandlerContext::getDist() {
+	return this->distribution;
+}
+
 bool HandlerContext::isequal(int* contexto1, int* contexto2) {
 	int i = 0;
 	while ((contexto1[i] != NULL) && (contexto1[i] != NULL)) {
@@ -25,6 +30,20 @@ bool HandlerContext::isequal(int* contexto1, int* contexto2) {
 	}
 	return true;
 }
+
+
+bool HandlerContext::addContToDist(int* contexto) {
+	int counter[256];
+	for (int i = 0; i <= 255; i++) {
+		counter[i] = 0;
+	}
+	//pair < int*, int[256]> par;// = new pair<int*, int[256]>;
+	//par = make_pair(contexto, counter);
+	this->distribution.insert(pair <int*, int[256]>(contexto, counter));
+	bool res = true;
+	return res;
+}
+
 
 bool HandlerContext::add(int* contexto) {
 	bool existe = false;
@@ -39,6 +58,7 @@ bool HandlerContext::add(int* contexto) {
 	}
 	if (!existe) {
 		this->contextos.push_front(contexto);
+		this->addContToDist(contexto);
 		return true;
 	}
 	return false;

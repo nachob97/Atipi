@@ -15,10 +15,11 @@ int main() {
         for (int j = 0; j < rows; j++) {
             Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
             HandlerContext* hc = HandlerContext::getInstance();
-            hc->add(cont->getExtracto());
+            if (hc->add(cont->getExtracto())) {
+                hc->addContToDist(cont->getExtracto());
+            }
+
         }
     }
-    //image = cont->getContexto();
-    //cout << image[1][1] << endl;
     return 0;
 }
