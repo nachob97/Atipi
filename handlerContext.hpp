@@ -10,23 +10,23 @@ class HandlerContext {
 private:
 	HandlerContext();
 	static HandlerContext* instance;
-	list<int*> contextos;
-	map<int*, int*> distribution;
+	list<int> contextos;
+	map<int, int*> distribution;
 
 	
 public:
 	//setters
-	bool add(int* contexto);
-	bool addContToDist(int* contexto);
-	void sum1(int* contexto, int value_pixel);
+	bool add(int contexto);
+	bool addContToDist(int contexto);
+	void sum1(int contexto, int value_pixel);
 
 	
 	//getters
 	static HandlerContext* getInstance();
-	list<int*> getContextos();
+	list<int> getContextos();
 	bool isequal(int* contexto1, int* contexto2);
-	map<int*, int*> getDist();
-	void remove() {}; //por ahora no se cuando eliminaría un contexto
+	map<int, int*> getDist();
+	void remove() {}; //por ahora no se cuando eliminarï¿½a un contexto
 
 };
 
