@@ -19,6 +19,8 @@ Context::Context(int** img, int pixel_x, int pixel_y, int k) {
 			//los contextos son espaciales.
 			//por lo tanto 0 < x < columns
 			//			   0 < y < rows
+
+			//hay que arreglar esto... o no
 			if ((pixel_x + i - 1) < 0 || (pixel_x - 1 + i) >= cols 
 				|| (pixel_y - 1 + j) < 0 || (pixel_y - 1 + j) >= rows) {
 				this->contexto[i][j] = this->out;

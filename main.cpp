@@ -9,13 +9,17 @@ int main() {
     int cols, rows, range;
     readHead(path, cols, rows, range);
     int** image = readFile(path, cols, rows, range);
-    createImage(image, cols, rows); //test de que carga bien la imagen
+    int** extractos = new int* [cols];
+    for (int i = 0; i < cols; i++) {
+		extractos[i] = new int[rows];
+	}
     HandlerContext* hc = HandlerContext::getInstance();
     //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
             Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
             int extracto = (int)cont->getExtracto().to_ulong();
+            extractos[i][j]= extracto;
             //if 
             hc->add(extracto); 
             //{
@@ -26,11 +30,13 @@ int main() {
         }
     }
     //crear la imagen
-  /*  for (int i = 0; i < cols; i++) {
+    float delta = 0.1;
+    for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
-            int prediccion = (int)cont->getExtracto().to_ulong();
-
+            int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
+            image[i][j]= prediccion;
         }
-    }*/
+    }
+    createImage(image, cols, rows); //test de que carga bien la imagen
     return 0;
 }
