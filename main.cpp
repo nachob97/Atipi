@@ -11,10 +11,10 @@ int main() {
     int** image = readFile(path, cols, rows, range);
     createImage(image, cols, rows); //test de que carga bien la imagen
     //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
+    HandlerContext* hc = HandlerContext::getInstance();
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
             Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
-            HandlerContext* hc = HandlerContext::getInstance();
             if (hc->add(cont->getExtracto())) {
                 hc->addContToDist(cont->getExtracto());
             }

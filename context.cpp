@@ -50,10 +50,10 @@ int Context::promedio() {
 }
 
 void Context::setExtracto(int k) {
-	bitset<8> norte(this->contexto[0][1]);//pixel NORTE en binario
-	bitset<8> este(this->contexto[1][2]);//pixel ESTE en binario
-	bitset<8> sur(this->contexto[2][1]);//pixel SUR en binario
-	bitset<8> oeste(this->contexto[1][0]);//pixel OESTE en binario
+	bitset<8> norte(this->contexto[1][0]);//pixel NORTE en binario
+	bitset<8> este(this->contexto[2][1]);//pixel ESTE en binario
+	bitset<8> sur(this->contexto[1][2]);//pixel SUR en binario
+	bitset<8> oeste(this->contexto[0][1]);//pixel OESTE en binario
 
 	this->extracto[0] = norte[0];
 	this->extracto[1] = este[0];
