@@ -11,7 +11,7 @@ private:
 	int out = 128;
 	bitset<12> extracto;
 public:
-	Context(int** img, int pixel_x, int pixel_y,int k);
+	Context(int** img, int pixel_x, int pixel_y,int k, int cols, int rows);
 	int** getContexto();
 	bitset<12> getExtracto();
 	int promedio();

@@ -1,5 +1,7 @@
 #include "handlerContext.hpp"
 #include <iterator>
+#include <iostream>
+#include <cmath>
 //#include <utility>
 
 using namespace std;
@@ -68,10 +70,22 @@ void HandlerContext::sum1(int contexto, int value_pixel) {
 }
 
 int HandlerContext::predict(int pixel, int extracto, float delta) {
-	float pz;// calculo de pz
-	float Ez;//caluclo Ez
+	//cout << pixel << "  " << extracto << "  " << endl;
+	int ocurrencias = 0;
+	for(int i = 0; i < 256; i++){
+		ocurrencias += this->distribution[extracto][i];
+	}
+
+	float pz = this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
+	
+	float Ez = 0;//caluclo Ez
+	for(int i = 0; i < 256; i++){
+		Ez += this->distribution[extracto][i] * i;
+	}
+
 	float aux1 = (1 - (delta / (255 * pz))) * pixel;
 	float aux2 = delta / (((1 - delta) * (256) - 1) * pz);
-	float aux3 = Ez - ((delta * 255) / 2);
-	int epsilon = aux1 + (aux2 * aux3);
+	float aux3 = Ez - ((delta * 256) / 2);
+	int epsilon = round(aux1 + (aux2 * aux3));
+	return epsilon;
 }

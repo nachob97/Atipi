@@ -17,15 +17,11 @@ int main() {
     //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
-            Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
+            Context* cont = new Context(image, i, j, 4, cols, rows);//valores de prueba para contexto
             int extracto = (int)cont->getExtracto().to_ulong();
+            //cout << cont->getExtracto() << "  " << extracto << endl;
             extractos[i][j]= extracto;
-            //if 
             hc->add(extracto); 
-            //{
-                //ya se hace en add
-              //  hc->addContToDist(cont->getExtracto());
-            //}
             hc->sum1(extracto, image[i][j]);
         }
     }
@@ -34,6 +30,7 @@ int main() {
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
             int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
+            cout << prediccion << "  " << extractos[i][j] << endl;
             image[i][j]= prediccion;
         }
     }

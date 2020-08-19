@@ -5,11 +5,9 @@
 
 using namespace std;
 
-Context::Context(int** img, int pixel_x, int pixel_y, int k) {
+Context::Context(int** img, int pixel_x, int pixel_y, int k, int cols, int rows) {
 	//this->extracto = new char[4 + k];
 	this->contexto = new int* [3];
-	int rows =  sizeof img / sizeof img[0]; // 2 rows  
-  	int cols = sizeof img[0] / sizeof(int); // 5 cols
 
 	for (int i = 0; i < 3; i++) {
 		this->contexto[i] = new int[3];
@@ -21,16 +19,17 @@ Context::Context(int** img, int pixel_x, int pixel_y, int k) {
 			//			   0 < y < rows
 
 			//hay que arreglar esto... o no
-			if ((pixel_x + i - 1) < 0 || (pixel_x - 1 + i) >= cols 
-				|| (pixel_y - 1 + j) < 0 || (pixel_y - 1 + j) >= rows) {
+			//cout << rows << "  " << cols << endl;
+			if ((pixel_x + i - 1) < 0 || (pixel_x - 1 + i) > cols-1 
+				|| (pixel_y - 1 + j) < 0 || (pixel_y - 1 + j) > rows-1) {
 				this->contexto[i][j] = this->out;
 			}
 			else
 				this->contexto[i][j] = img[pixel_x - 1 + i][pixel_y - 1 + j];
-			cout << this->contexto[i][j] << " "; //para verifcar si se carga bien
+			//cout << this->contexto[i][j] << " "; //para verifcar si se carga bien
 			
 		}
-		cout << endl;
+		//cout << endl;
 	}
 	this->setExtracto(k);
 }
@@ -95,6 +94,7 @@ void Context::setExtracto(int k) {
 	if (k > 5) this->extracto[12-(k-5)] = promedio_bin[2];
 	if (k > 6) this->extracto[12-(k-6)] = este[1];
 	if (k > 7) this->extracto[12-(k-7)] = promedio_bin[3];
+	//cout << norte << "  " << this->extracto << endl;
 }
 
 Context::~Context() {}
