@@ -69,23 +69,31 @@ void HandlerContext::sum1(int contexto, int value_pixel) {
 	this->distribution[contexto][value_pixel] = this->distribution[contexto][value_pixel] + 1;
 }
 
-int HandlerContext::predict(int pixel, int extracto, float delta) {
+int HandlerContext::predict(int pixel, int extracto, double delta) {
 	//cout << pixel << "  " << extracto << "  " << endl;
-	float ocurrencias = 0;
+	double ocurrencias = 0;
 	for(int i = 0; i < 256; i++){
-		ocurrencias += (float)this->distribution[extracto][i];
+		ocurrencias += (double)this->distribution[extracto][i];
 	}
 
-	float pz = (float)this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
+	double pz = (double)this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
 	
-	float Ez = 0;//caluclo Ez
+	double Ez = 0;
+	//caluclo Ez
 	for(int i = 0; i < 256; i++){
-		Ez += ((float)this->distribution[extracto][i]/ocurrencias) * (float)i;
+		Ez += ((double)this->distribution[extracto][i]/ocurrencias) * (double)i;
 	}
-	cout << pz << "  " << Ez << endl;
-	float aux1 = (1 - (delta / (255 * pz))) * pixel;
-	float aux2 = delta / (((1 - delta) * (256) - 1) * pz);
-	float aux3 = Ez - ((delta * 256) / 2);
+
+	double aux1 = (1.0 - (delta / (255.0 * pz))) * pixel;
+	double aux2 = delta / (((1 - delta) * (256) - 1) * pz);
+	double aux3 = Ez - ((delta * 256) / 2);
 	int epsilon = round(aux1 + (aux2 * aux3));
+	
+	if (epsilon < 0){
+		epsilon = 0;
+	}
+	if (epsilon > 255){
+		epsilon = 255;
+	}
 	return epsilon;
 }

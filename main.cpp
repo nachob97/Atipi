@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    string path = "./ImgDUDE-M-arioSimetrico/Img20M0.05.pgm";
+    string path = "./ImgDUDE-M-arioSimetrico/foto_ReadFile.pgm";
     int cols, rows, range;
     readHead(path, cols, rows, range);
     int** image = readFile(path, cols, rows, range);
@@ -26,11 +26,11 @@ int main() {
         }
     }
     //crear la imagen
-    float delta = 0.1;
+    double delta = 0.35;
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
             int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
-            cout << prediccion << "  " << extractos[i][j] << endl;
+            //cout << prediccion << "  " << extractos[i][j] << endl;
             image[i][j]= prediccion;
         }
     }

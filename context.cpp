@@ -78,23 +78,28 @@ void Context::setExtracto(int k) {
 	bitset<8> este(this->contexto[2][1]);//pixel ESTE en binario
 	bitset<8> sur(this->contexto[1][2]);//pixel SUR en binario
 	bitset<8> oeste(this->contexto[0][1]);//pixel OESTE en binario
+	/*cout << "Norte: "<< norte << endl; 
+	cout << "Este: "<< este << endl;
+	cout << "Sur: "<< sur << endl;
+	cout << "Oeste: "<< oeste << endl;*/
 
-	this->extracto[12-(4+k)] = norte[0];
-	this->extracto[12-(3+k)] = este[0];
-	this->extracto[12-(2+k)] = sur[0];
-	this->extracto[12-(1+k)] = oeste[0];
+
+	this->extracto[3+k] = norte[7];
+	this->extracto[2+k] = este[7];
+	this->extracto[1+k] = sur[7];
+	this->extracto[k] = oeste[7];
 
 	int promedio = this->promedio();
 	bitset<8> promedio_bin(promedio);
-	if (k > 0) this->extracto[12-k] = norte[1];
-	if (k > 1) this->extracto[12-(k-1)] = promedio_bin[0];
-	if (k > 2) this->extracto[12-(k-2)] = oeste[1];
-	if (k > 3) this->extracto[12-(k-3)] = promedio_bin[1];
-	if (k > 4) this->extracto[12-(k-4)] = sur[1];
-	if (k > 5) this->extracto[12-(k-5)] = promedio_bin[2];
-	if (k > 6) this->extracto[12-(k-6)] = este[1];
-	if (k > 7) this->extracto[12-(k-7)] = promedio_bin[3];
-	//cout << norte << "  " << this->extracto << endl;
+	if (k > 0) this->extracto[k-1] = norte[6];
+	if (k > 1) this->extracto[k-2] = promedio_bin[7];
+	if (k > 2) this->extracto[k-3] = oeste[6];
+	if (k > 3) this->extracto[k-4] = promedio_bin[6];
+	if (k > 4) this->extracto[k-5] = sur[6];
+	if (k > 5) this->extracto[k-6] = promedio_bin[5];
+	if (k > 6) this->extracto[k-7] = este[6];
+	if (k > 7) this->extracto[k-8] = promedio_bin[4];
+	/*cout << "Extracto:  " << this->extracto << endl;*/
 }
 
 Context::~Context() {}

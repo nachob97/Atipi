@@ -28,7 +28,7 @@ public:
 	map<int, int*> getDist();
 	void remove() {}; //por ahora no se cuando eliminar�a un contexto
 
-	int predict(int pixel, int extracto, float delta);
+	int predict(int pixel, int extracto, double delta);
 
 };
 

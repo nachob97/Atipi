@@ -66,6 +66,7 @@ void createImage(int** image, int cols, int rows) {
     FILE* pgmimg;
     pgmimg = fopen("foto_ReadFile.pgm", "wb");
     fprintf(pgmimg, "P2\n"); 
+    fprintf(pgmimg, "P2\n"); 
     fprintf(pgmimg, "%d %d\n", cols, rows); 
     fprintf(pgmimg, "255\n"); 
     for (int i = 0; i < cols; i++) {
