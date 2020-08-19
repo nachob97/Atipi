@@ -66,3 +66,12 @@ bool HandlerContext::add(int contexto) {
 void HandlerContext::sum1(int contexto, int value_pixel) {
 	this->distribution[contexto][value_pixel] = this->distribution[contexto][value_pixel] + 1;
 }
+
+int HandlerContext::predict(int pixel, int extracto, float delta) {
+	float pz;// calculo de pz
+	float Ez;//caluclo Ez
+	float aux1 = (1 - (delta / (255 * pz))) * pixel;
+	float aux2 = delta / (((1 - delta) * (256) - 1) * pz);
+	float aux3 = Ez - ((delta * 255) / 2);
+	int epsilon = aux1 + (aux2 * aux3);
+}
