@@ -71,18 +71,18 @@ void HandlerContext::sum1(int contexto, int value_pixel) {
 
 int HandlerContext::predict(int pixel, int extracto, float delta) {
 	//cout << pixel << "  " << extracto << "  " << endl;
-	int ocurrencias = 0;
+	float ocurrencias = 0;
 	for(int i = 0; i < 256; i++){
-		ocurrencias += this->distribution[extracto][i];
+		ocurrencias += (float)this->distribution[extracto][i];
 	}
 
-	float pz = this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
+	float pz = (float)this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
 	
 	float Ez = 0;//caluclo Ez
 	for(int i = 0; i < 256; i++){
-		Ez += this->distribution[extracto][i] * i;
+		Ez += ((float)this->distribution[extracto][i]/ocurrencias) * (float)i;
 	}
-
+	cout << pz << "  " << Ez << endl;
 	float aux1 = (1 - (delta / (255 * pz))) * pixel;
 	float aux2 = delta / (((1 - delta) * (256) - 1) * pz);
 	float aux3 = Ez - ((delta * 256) / 2);
