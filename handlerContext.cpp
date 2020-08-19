@@ -14,11 +14,11 @@ HandlerContext* HandlerContext::getInstance() {
 	return (instance);
 }
 
-list<int*> HandlerContext::getContextos() {
+list<int> HandlerContext::getContextos() {
 	return (this->contextos);
 }
 
-map<int*, int*> HandlerContext::getDist() {
+map<int, int*> HandlerContext::getDist() {
 	return this->distribution;
 }
 
@@ -32,23 +32,24 @@ bool HandlerContext::isequal(int* contexto1, int* contexto2) {
 }
 
 
-bool HandlerContext::addContToDist(int* contexto) {
+bool HandlerContext::addContToDist(int contexto) {
 	int* counter = new int[256];
 	for (int i = 0; i <= 255; i++) {
 		counter[i] = 0;
 	}
-	bool res = this->distribution.insert(pair <int*, int*>((contexto, counter), 0)).second;
+	bool res = this->distribution.insert({contexto, counter}).second;
 	return res;
 }
 
 
-bool HandlerContext::add(int* contexto) {
+bool HandlerContext::add(int contexto) {
 	bool existe = false;
-	int* element;
-	list<int*>::iterator i = this->contextos.begin();
+	int element;
+	list<int>::iterator i = this->contextos.begin();
+	//porque no usar "find" que implementa stl?
 	while (!existe && i != this->contextos.end()){ //aca seria while para cortar antes
 		element = *i;
-		if (this->isequal(contexto, element)) { 
+		if (contexto == element) { 
 			existe = true; 
 		}
 		i++;
@@ -62,6 +63,6 @@ bool HandlerContext::add(int* contexto) {
 }
 
 
-void HandlerContext::sum1(int* contexto, int value_pixel) {
+void HandlerContext::sum1(int contexto, int value_pixel) {
 	this->distribution[contexto][value_pixel] = this->distribution[contexto][value_pixel] + 1;
 }

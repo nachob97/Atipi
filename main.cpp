@@ -9,18 +9,34 @@ int main() {
     int cols, rows, range;
     readHead(path, cols, rows, range);
     int** image = readFile(path, cols, rows, range);
-    createImage(image, cols, rows); //test de que carga bien la imagen
-    //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
+    int** extractos = new int* [cols];
+    for (int i = 0; i < cols; i++) {
+		extractos[i] = new int[rows];
+	}
     HandlerContext* hc = HandlerContext::getInstance();
+    //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
             Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
-            if (hc->add(cont->getExtracto())) {
-                hc->addContToDist(cont->getExtracto());
-            }
-            hc->sum1(cont->getExtracto(), image[i][j]);
-
+            int extracto = (int)cont->getExtracto().to_ulong();
+            extractos[i][j]= extracto;
+            //if 
+            hc->add(extracto); 
+            //{
+                //ya se hace en add
+              //  hc->addContToDist(cont->getExtracto());
+            //}
+            hc->sum1(extracto, image[i][j]);
         }
     }
+    //crear la imagen
+    float delta = 0.1;
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
+            image[i][j]= prediccion;
+        }
+    }
+    createImage(image, cols, rows); //test de que carga bien la imagen
     return 0;
 }
