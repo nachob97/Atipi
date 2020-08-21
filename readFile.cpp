@@ -68,14 +68,14 @@ void readHead(string path,int &cols, int &rows, int &range) {
 void createImage(int** image, int cols, int rows){
     FILE* pgmimg;
     pgmimg = fopen("foto_ReadFile.pgm", "wb");
-    fprintf(pgmimg, "P2\n"); 
+    fprintf(pgmimg, "P5\n"); 
     fprintf(pgmimg, "%d %d\n", cols, rows); 
     fprintf(pgmimg, "255\n"); 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            fprintf(pgmimg, "%d ", (image[i][j]) );
+            fprintf(pgmimg, "%c", (image[i][j]) );
         }
-        fprintf(pgmimg, "\n");
+        //fprintf(pgmimg, "\n");
     }
     fclose(pgmimg);
 }
