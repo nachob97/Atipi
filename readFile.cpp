@@ -68,7 +68,8 @@ void readHead(string path,int &cols, int &rows, int &range) {
 void createImage(int** image, int cols, int rows){
     FILE* pgmimg;
     pgmimg = fopen("foto_ReadFile.pgm", "wb");
-    fprintf(pgmimg, "P5\n"); 
+    fprintf(pgmimg, "P5\n");
+    fprintf(pgmimg, "#Denoised Image (Ignacio bianchi & Santiago Curi)\n");  
     fprintf(pgmimg, "%d %d\n", cols, rows); 
     fprintf(pgmimg, "255\n"); 
     for (int i = 0; i < rows; i++) {
