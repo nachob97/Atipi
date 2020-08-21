@@ -5,19 +5,19 @@
 using namespace std;
 
 int main() {
-    string path = "./ImgDUDE-M-arioSimetrico/foto_ReadFile.pgm";
+    string path = "./ImgDUDE-M-arioSimetrico/Img07M0.10.pgm";
     int cols, rows, range;
     readHead(path, cols, rows, range);
     int** image = readFile(path, cols, rows, range);
-    int** extractos = new int* [cols];
-    for (int i = 0; i < cols; i++) {
-		extractos[i] = new int[rows];
+    int** extractos = new int* [rows];
+    for (int i = 0; i < rows; i++) {
+		extractos[i] = new int[cols];
 	}
     HandlerContext* hc = HandlerContext::getInstance();
     //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
-    for (int i = 0; i < cols; i++) {
-        for (int j = 0; j < rows; j++) {
-            Context* cont = new Context(image, i, j, 4, cols, rows);//valores de prueba para contexto
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            Context* cont = new Context(image, i, j, 8, cols, rows);//valores de prueba para contexto
             int extracto = (int)cont->getExtracto().to_ulong();
             //cout << cont->getExtracto() << "  " << extracto << endl;
             extractos[i][j]= extracto;
@@ -26,9 +26,9 @@ int main() {
         }
     }
     //crear la imagen
-    double delta = 0.35;
-    for (int i = 0; i < cols; i++) {
-        for (int j = 0; j < rows; j++) {
+    double delta = 0.10;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
             int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
             //cout << prediccion << "  " << extractos[i][j] << endl;
             image[i][j]= prediccion;

@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <string>
+#include <stdlib.h>
 #include "readFile.hpp"
 
 
@@ -16,9 +19,9 @@ int** readFile(string path, int cols, int rows, int range) {
         getline(infile, line);// esto es el comentario
         getline(infile, line);
         getline(infile, line);
-        int** img = new int* [cols];
-        for (int i = 0; i < cols; i++) {
-            img[i] = new int[rows];
+        int** img = new int* [rows];
+        for (int i = 0; i < rows; i++) {
+            img[i] = new int[cols];
         }
         //------------------- CANTIDAD DE COLUMNAS, FILAS Y RANGO
         cout << cols << endl;
@@ -26,8 +29,8 @@ int** readFile(string path, int cols, int rows, int range) {
         cout << range << endl;
         //--------------------CANTIDAD DE COLUMNAS, FILAS Y RANGO
         unsigned char c;
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 //infile.read(&c, sizeof(char));
                 c= char(ss->sbumpc());
                 img[i][j] = int(c);//ss->sbumpc();
@@ -62,16 +65,15 @@ void readHead(string path,int &cols, int &rows, int &range) {
 }
 
 
-void createImage(int** image, int cols, int rows) {
+void createImage(int** image, int cols, int rows){
     FILE* pgmimg;
     pgmimg = fopen("foto_ReadFile.pgm", "wb");
     fprintf(pgmimg, "P2\n"); 
-    fprintf(pgmimg, "P2\n"); 
     fprintf(pgmimg, "%d %d\n", cols, rows); 
     fprintf(pgmimg, "255\n"); 
-    for (int i = 0; i < cols; i++) {
-        for (int j = 0; j < rows; j++) {
-            fprintf(pgmimg, "%d ", image[i][j]);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            fprintf(pgmimg, "%d ", (image[i][j]) );
         }
         fprintf(pgmimg, "\n");
     }
