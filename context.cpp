@@ -78,11 +78,6 @@ void Context::setExtracto(int k) {
 	bitset<8> este(this->contexto[2][1]);//pixel ESTE en binario
 	bitset<8> sur(this->contexto[1][2]);//pixel SUR en binario
 	bitset<8> oeste(this->contexto[0][1]);//pixel OESTE en binario
-	/*cout << "Norte: "<< norte << endl; 
-	cout << "Este: "<< este << endl;
-	cout << "Sur: "<< sur << endl;
-	cout << "Oeste: "<< oeste << endl;*/
-
 
 	this->extracto[3+k] = norte[7];
 	this->extracto[2+k] = este[7];

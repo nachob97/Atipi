@@ -25,7 +25,7 @@ int main() {
         }
     }
     //crear la imagen
-    double delta = 0.35;
+    double delta = 0.10;
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
             int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
