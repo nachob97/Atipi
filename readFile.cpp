@@ -64,38 +64,16 @@ void readHead(string path,int &cols, int &rows, int &range) {
 
 void createImage(int** image, int cols, int rows) {
     FILE* pgmimg;
-    pgmimg = fopen("foto_ReadFile.pgm", "wb");
+    pgmimg = fopen("foto.pgm", "wb");
     fprintf(pgmimg, "P2\n"); 
-    fprintf(pgmimg, "P2\n"); 
+    fprintf(pgmimg, "#comentario\n"); 
     fprintf(pgmimg, "%d %d\n", cols, rows); 
     fprintf(pgmimg, "255\n"); 
     for (int i = 0; i < cols; i++) {
         for (int j = 0; j < rows; j++) {
-            fprintf(pgmimg, "%d ", image[i][j]);
+            fprintf(pgmimg, "%d ", (image[i][j]));
         }
         fprintf(pgmimg, "\n");
     }
     fclose(pgmimg);
 }
-
-
-/*
-int main() {
-    string path = "./ImgDUDE-M-arioSimetrico/Img20M0.05.pgm";
-    int cols, rows, range;
-    readHead(path, cols, rows, range);
-    int** image = readFile(path, cols, rows, range);
-    createImage(image, cols, rows); //test de que carga bien la imagen
-    //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
-    for (int i = 0; i < cols; i++) {
-        for (int j = 0; j < rows; j++) {
-            Context* cont = new Context(image, i, j, 4);//valores de prueba para contexto
-            HandlerContext* hc = HandlerContext::getInstance();
-            hc->add(cont->getExtracto());
-        }
-    }
-    //image = cont->getContexto();
-    //cout << image[1][1] << endl;
-    return 0;
-}
-*/
