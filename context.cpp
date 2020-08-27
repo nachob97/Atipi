@@ -20,8 +20,8 @@ Context::Context(int** img, int pixel_x, int pixel_y, int k, int cols, int rows)
 
 			//hay que arreglar esto... o no
 			//cout << rows << "  " << cols << endl;
-			if ((pixel_x + i - 1) < 0 || (pixel_x - 1 + i) > cols-1 
-				|| (pixel_y - 1 + j) < 0 || (pixel_y - 1 + j) > rows-1) {
+			if ((pixel_x + i - 1) < 0 || (pixel_x - 1 + i) > rows-1 
+				|| (pixel_y - 1 + j) < 0 || (pixel_y - 1 + j) > cols-1) {
 				this->contexto[i][j] = this->out;
 			}
 			else
@@ -74,10 +74,15 @@ int Context::promedio() {
 }
 
 void Context::setExtracto(int k) {
-	bitset<8> norte(this->contexto[1][0]);//pixel NORTE en binario
-	bitset<8> este(this->contexto[2][1]);//pixel ESTE en binario
-	bitset<8> sur(this->contexto[1][2]);//pixel SUR en binario
-	bitset<8> oeste(this->contexto[0][1]);//pixel OESTE en binario
+	bitset<8> norte(this->contexto[0][1]);//pixel NORTE en binario
+	bitset<8> este(this->contexto[1][2]);//pixel ESTE en binario
+	bitset<8> sur(this->contexto[2][1]);//pixel SUR en binario
+	bitset<8> oeste(this->contexto[1][0]);//pixel OESTE en binario
+	/*cout << "Norte: "<< norte << endl; 
+	cout << "Este: "<< este << endl;
+	cout << "Sur: "<< sur << endl;
+	cout << "Oeste: "<< oeste << endl;*/
+
 
 	this->extracto[3+k] = norte[7];
 	this->extracto[2+k] = este[7];

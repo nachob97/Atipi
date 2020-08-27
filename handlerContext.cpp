@@ -49,6 +49,7 @@ bool HandlerContext::add(int contexto) {
 	int element;
 	list<int>::iterator i = this->contextos.begin();
 	//porque no usar "find" que implementa stl?
+	//POTENCIAL PROBLEMA. Find es mas seguro
 	while (!existe && i != this->contextos.end()){ //aca seria while para cortar antes
 		element = *i;
 		if (contexto == element) { 
