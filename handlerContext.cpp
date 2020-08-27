@@ -50,7 +50,7 @@ bool HandlerContext::add(int contexto) {
 	list<int>::iterator i = this->contextos.begin();
 	//porque no usar "find" que implementa stl?
 	//POTENCIAL PROBLEMA. Find es mas seguro
-	while (!existe && i != this->contextos.end()){ //aca seria while para cortar antes
+	while (!existe && i != this->contextos.end()){
 		element = *i;
 		if (contexto == element) { 
 			existe = true; 
@@ -68,21 +68,32 @@ bool HandlerContext::add(int contexto) {
 
 void HandlerContext::sum1(int contexto, int value_pixel) {
 	this->distribution[contexto][value_pixel] = this->distribution[contexto][value_pixel] + 1;
+	
+	if (this->ocurrencias.count(contexto) == 0) {
+		this->ocurrencias.insert({ contexto, 1 });
+	}
+	else
+		this->ocurrencias[contexto]++;
 }
 
 int HandlerContext::predict(int pixel, int extracto, double delta) {
 	//cout << pixel << "  " << extracto << "  " << endl;
-	double ocurrencias = 0;
-	for(int i = 0; i < 256; i++){
-		ocurrencias += (double)this->distribution[extracto][i];
+	/*int ocurrencias = 0;
+	if (this->ocurrencias.count(extracto) == 0) {
+		for (int i = 0; i < 256; i++) {
+			ocurrencias += this->distribution[extracto][i];
+		}
+		this->ocurrencias.insert({ extracto, ocurrencias });
 	}
+	else*/
+		 int ocurrencias = this->ocurrencias[extracto];
 
-	double pz = (double)this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
+	double pz = (float)this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
 	
-	double Ez = 0;
-	//caluclo Ez
+	float Ez = 0;
+	//calculo Ez
 	for(int i = 0; i < 256; i++){
-		Ez += ((double)this->distribution[extracto][i]/ocurrencias) * (double)i;
+		Ez += ((float)this->distribution[extracto][i]/ocurrencias) * i;
 	}
 
 	double aux1 = (1.0 - (delta / (255.0 * pz))) * pixel;

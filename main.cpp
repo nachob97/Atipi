@@ -1,13 +1,21 @@
 #include <iostream>
 #include "readFile.hpp"
 #include "handlerContext.hpp"
+#include <time.h>
 
 using namespace std;
 
 int main() {
-    string path = "./ImgDUDE-M-arioSimetrico/Img07M0.35.pgm";
+
+//--------------------------------------------------
+    clock_t start, end;
+    start = clock();
+//--------------------------------------------------
+
+    string path = "./ImgDUDE-M-arioSimetrico/Img07M0.05.pgm";
     int cols, rows, range;
-    readHead(path, cols, rows, range);
+    cols = 0; rows = 0;range=0;
+    //readHead(path, cols, rows, range);
     int** image = readFile(path, cols, rows, range);
     int** extractos = new int* [rows];
     for (int i = 0; i < rows; i++) {
@@ -19,21 +27,26 @@ int main() {
         for (int j = 0; j < cols; j++) {
             Context* cont = new Context(image, i, j, 8, cols, rows);//valores de prueba para contexto
             int extracto = (int)cont->getExtracto().to_ulong();
-            //cout << cont->getExtracto() << "  " << extracto << endl;
             extractos[i][j]= extracto;
             hc->add(extracto); 
             hc->sum1(extracto, image[i][j]);
         }
     }
     //crear la imagen
-    double delta = 0.35;
+    float delta = 0.10;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
-            //cout << prediccion << "  " << extractos[i][j] << endl;
             image[i][j]= prediccion;
         }
     }
     createImage(image, cols, rows); //test de que carga bien la imagen
+
+//--------------------------------------------------
+    end = clock();
+    float runtime = float(end - start) / float(CLOCKS_PER_SEC);
+    cout << runtime << "seconds" << endl;
+//--------------------------------------------------
+
     return 0;
 }
