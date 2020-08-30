@@ -43,9 +43,14 @@ int main(int arguments, char* argv[]) {
     }
     //crear la imagen
     //float delta = 0.10;
+    int prediccion;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            int prediccion = hc->predict(image[i][j], extractos[i][j], delta);
+            if (arguments > 2) {
+                prediccion = hc->predict(prefilter[i][j], extractos[i][j], delta);
+            }
+            else 
+                prediccion = hc->predict(image[i][j], extractos[i][j], delta);
             image[i][j]= prediccion;
         }
     }
