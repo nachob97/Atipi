@@ -42,7 +42,6 @@ int main(int arguments, char* argv[]) {
         }
     }
     //crear la imagen
-    //float delta = 0.10;
     int prediccion;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
