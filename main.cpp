@@ -5,19 +5,23 @@
 
 using namespace std;
 
+
 int main(int arguments, char* argv[]) {
 //--------------------------------------------------float delta, string prefilterPath
     clock_t start, end;
     start = clock();
 //--------------------------------------------------
     float delta = strtof(argv[1],nullptr);
-    string path = "./ImgDUDE-M-arioSimetrico/Img07M0.05.pgm";
+    int k = atoi(argv[2]);
+    string path = (argv[3]);
+    string output = argv[4];
+    
     int cols, rows, range;
     cols = 0; rows = 0;range=0;
     //readHead(path, cols, rows, range);
     int** prefilter;
-    if (arguments > 2) {
-        string prefilterPath = argv[2];
+    if (arguments > 5) {
+        string prefilterPath = argv[5];
         cout << prefilterPath << endl;
         prefilter = readFile(prefilterPath, cols, rows, range);
     }
@@ -30,7 +34,7 @@ int main(int arguments, char* argv[]) {
     //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            Context* cont = new Context(image, i, j, 4, cols, rows);//valores de prueba para contexto
+            Context* cont = new Context(image, i, j, k, cols, rows);//valores de prueba para contexto
             int extracto = (int)cont->getExtracto().to_ulong();
             extractos[i][j]= extracto;
             hc->add(extracto);
@@ -53,7 +57,7 @@ int main(int arguments, char* argv[]) {
             image[i][j]= prediccion;
         }
     }
-    createImage(image, cols, rows); //test de que carga bien la imagen
+    createImage(image, cols, rows, output); //test de que carga bien la imagen
 
 //--------------------------------------------------
     end = clock();
