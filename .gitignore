@@ -11,3 +11,17 @@ readFile.o
 handlerContext.o
 main.o
 makefile
+/context.obj
+/handlerContext.obj
+/diffpnm.obj
+/diffpnm.exe
+/save35_4.pgm
+/save35_3.pgm
+/save35_2.pgm
+/save35.pgm
+/save3.pgm
+/save2.pgm
+/save.pgm
+/readFile.obj
+/main.obj
+/main.exe

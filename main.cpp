@@ -14,6 +14,7 @@ int main(int arguments, char* argv[]) {
     float delta = strtof(argv[1],nullptr);
     int k = atoi(argv[2]);
     string path = (argv[3]);
+    cout << path << endl;
     char* output = argv[4];
     
     int cols, rows, range;
@@ -32,28 +33,38 @@ int main(int arguments, char* argv[]) {
 	}
     HandlerContext* hc = HandlerContext::getInstance();
     //ACA VAN 2 FOR PARA SACAR CONTEXTO DE TODOS LOS PIXEL
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            Context* cont = new Context(image, i, j, k, cols, rows);//valores de prueba para contexto
-            int extracto = (int)cont->getExtracto().to_ulong();
-            extractos[i][j]= extracto;
-            hc->add(extracto);
-            if (arguments > 2) {
-                hc->sum1(extracto, prefilter[i][j]); 
-            }
-            else
+
+    if (arguments > 5) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Context* cont = new Context(prefilter, i, j, k, cols, rows);//valores de prueba para contexto
+                int extracto = (int)cont->getExtracto().to_ulong();
+                extractos[i][j] = extracto;
+                hc->add(extracto);
                 hc->sum1(extracto, image[i][j]);
+            }
         }
     }
+    else {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Context* cont = new Context(image, i, j, k, cols, rows);//valores de prueba para contexto
+                int extracto = (int)cont->getExtracto().to_ulong();
+                extractos[i][j] = extracto;
+                hc->add(extracto);
+                hc->sum1(extracto, image[i][j]);
+            }
+        }
+    }
+
+
+
+
     //crear la imagen
     int prediccion;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            if (arguments > 2) {
-                prediccion = hc->predict(prefilter[i][j], extractos[i][j], delta);
-            }
-            else 
-                prediccion = hc->predict(image[i][j], extractos[i][j], delta);
+            prediccion = hc->predict(image[i][j], extractos[i][j], delta);
             image[i][j]= prediccion;
         }
     }
