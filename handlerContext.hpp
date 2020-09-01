@@ -14,6 +14,8 @@ private:
 	map<int, int*> distribution;
 
 	map<int, int> ocurrencias; // cantidad de ocurrencias segun el extracto
+	map<int, float> esperanza; // cantidad de ocurrencias segun el extracto
+
 
 	
 public:
@@ -29,7 +31,7 @@ public:
 	bool isequal(int* contexto1, int* contexto2);
 	map<int, int*> getDist();
 	void remove() {}; //por ahora no se cuando eliminar�a un contexto
-
+	void init_esperanza();
 	int predict(int pixel, int extracto, double delta);
 
 };

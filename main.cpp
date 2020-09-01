@@ -62,6 +62,7 @@ int main(int arguments, char* argv[]) {
 
     //crear la imagen
     int prediccion;
+    hc->init_esperanza();
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             prediccion = hc->predict(image[i][j], extractos[i][j], delta);

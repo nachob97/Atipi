@@ -76,6 +76,20 @@ void HandlerContext::sum1(int contexto, int value_pixel) {
 		this->ocurrencias[contexto]++;
 }
 
+void HandlerContext::init_esperanza(){
+		//calculo Ez
+	int extractos = this->distribution.size();
+	for(int ex = 0; ex<extractos; ex++){
+		float Ez = 0;
+		int ocurrencias = this->ocurrencias[ex];
+		for(int i = 0; i < 256; i++){
+			Ez += ((float)this->distribution[ex][i]/ocurrencias) * i;
+		}
+	this->esperanza.insert({ex, Ez});
+	}
+}
+
+
 int HandlerContext::predict(int pixel, int extracto, double delta) {
 	//cout << pixel << "  " << extracto << "  " << endl;
 	/*int ocurrencias = 0;
@@ -86,15 +100,12 @@ int HandlerContext::predict(int pixel, int extracto, double delta) {
 		this->ocurrencias.insert({ extracto, ocurrencias });
 	}
 	else*/
-		 int ocurrencias = this->ocurrencias[extracto];
+	int ocurrencias = this->ocurrencias[extracto];
 
 	double pz = (float)this->distribution[extracto][pixel] / ocurrencias;// calculo de pz
-	
-	float Ez = 0;
-	//calculo Ez
-	for(int i = 0; i < 256; i++){
-		Ez += ((float)this->distribution[extracto][i]/ocurrencias) * i;
-	}
+
+	float Ez = this->esperanza[extracto];
+
 
 	double aux1 = (1.0 - (delta / (255.0 * pz))) * pixel;
 	double aux2 = delta / (((1 - delta) * (256) - 1) * pz);
