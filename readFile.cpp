@@ -68,7 +68,7 @@ void readHead(string path,int &cols, int &rows, int &range) {
 }
 */
 
-void createImage(int** image, int cols, int rows, string output){
+void createImage(int** image, int cols, int rows, char* output){
     FILE* pgmimg;
     pgmimg = fopen(output, "wb");
     fprintf(pgmimg, "P5\n");

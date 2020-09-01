@@ -14,7 +14,7 @@ int main(int arguments, char* argv[]) {
     float delta = strtof(argv[1],nullptr);
     int k = atoi(argv[2]);
     string path = (argv[3]);
-    string output = argv[4];
+    char* output = argv[4];
     
     int cols, rows, range;
     cols = 0; rows = 0;range=0;
