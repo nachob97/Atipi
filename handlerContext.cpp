@@ -78,14 +78,18 @@ void HandlerContext::sum1(int contexto, int value_pixel) {
 
 void HandlerContext::init_esperanza(){
 		//calculo Ez
-	int extractos = this->distribution.size();
-	for(int ex = 0; ex<extractos; ex++){
+	list<int>::iterator i = this->contextos.begin();
+	//int extractos = this->contextos.size();
+	//cout << extractos << "llego" << endl;
+	while (i != this->contextos.end()){
+		int ex = *i;
 		float Ez = 0;
 		int ocurrencias = this->ocurrencias[ex];
 		for(int i = 0; i < 256; i++){
 			Ez += ((float)this->distribution[ex][i]/ocurrencias) * i;
 		}
-	this->esperanza.insert({ex, Ez});
+		this->esperanza.insert({ex, Ez});
+		i++;
 	}
 }
 
