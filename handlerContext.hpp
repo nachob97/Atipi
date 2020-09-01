@@ -13,6 +13,8 @@ private:
 	list<int> contextos;
 	map<int, int*> distribution;
 
+	map<int, int> ocurrencias; // cantidad de ocurrencias segun el extracto
+
 	
 public:
 	//setters

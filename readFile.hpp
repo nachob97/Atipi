@@ -7,8 +7,8 @@
 #include <string>
 
 
-int** readFile(string path, int cols, int rows, int range);
-void readHead(string path, int& cols, int& rows, int& range);
+int** readFile(string path, int& cols, int& rows, int& range);
+//void readHead(string path, int& cols, int& rows, int& range);
 void createImage(int** image, int cols, int rows);
 
 #endif
