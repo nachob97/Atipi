@@ -1,0 +1,60 @@
+Iter=1
+393216 symbols processed. Max difference = 201 RMSE =  9.305 PSNR = 28.76dB
+
+Iter=2
+393216 symbols processed. Max difference = 201 RMSE =  9.241 PSNR = 28.82dB
+
+Iter=3
+393216 symbols processed. Max difference = 201 RMSE =  9.308 PSNR = 28.75dB
+
+Iter=4
+393216 symbols processed. Max difference = 201 RMSE =  9.306 PSNR = 28.76dB
+
+Iter=5
+393216 symbols processed. Max difference = 200 RMSE =  9.307 PSNR = 28.75dB
+
+Iter=6
+393216 symbols processed. Max difference = 201 RMSE =  9.286 PSNR = 28.77dB
+
+Iter=7
+393216 symbols processed. Max difference = 201 RMSE =  9.315 PSNR = 28.75dB
+
+Iter=8
+393216 symbols processed. Max difference = 201 RMSE =  9.311 PSNR = 28.75dB
+
+Iter=9
+393216 symbols processed. Max difference = 200 RMSE =  9.306 PSNR = 28.76dB
+
+Iter=10
+393216 symbols processed. Max difference = 201 RMSE =  9.288 PSNR = 28.77dB
+
+Iter=1
+393216 symbols processed. Max difference = 218 RMSE =  9.401 PSNR = 28.67dB
+
+Iter=2
+393216 symbols processed. Max difference = 224 RMSE =  9.406 PSNR = 28.66dB
+
+Iter=3
+393216 symbols processed. Max difference = 242 RMSE =  9.432 PSNR = 28.64dB
+
+Iter=4
+393216 symbols processed. Max difference = 225 RMSE =  9.356 PSNR = 28.71dB
+
+Iter=5
+393216 symbols processed. Max difference = 225 RMSE =  9.436 PSNR = 28.64dB
+
+Iter=6
+393216 symbols processed. Max difference = 225 RMSE =  9.392 PSNR = 28.68dB
+
+Iter=7
+393216 symbols processed. Max difference = 238 RMSE =  9.433 PSNR = 28.64dB
+
+Iter=8
+393216 symbols processed. Max difference = 238 RMSE =  9.375 PSNR = 28.69dB
+
+Iter=9
+393216 symbols processed. Max difference = 225 RMSE =  9.447 PSNR = 28.63dB
+
+Iter=10
+393216 symbols processed. Max difference = 225 RMSE =  9.384 PSNR = 28.68dB
+

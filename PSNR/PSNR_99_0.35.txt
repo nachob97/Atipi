@@ -1,0 +1,27 @@
+K=8
+5242880 symbols processed. Max difference = 255 RMSE = 26.291 PSNR = 19.73dB
+
+K=7
+5242880 symbols processed. Max difference = 255 RMSE = 25.386 PSNR = 20.04dB
+
+K=6
+5242880 symbols processed. Max difference = 255 RMSE = 24.632 PSNR = 20.30dB
+
+K=5
+5242880 symbols processed. Max difference = 255 RMSE = 25.323 PSNR = 20.06dB
+
+K=4
+5242880 symbols processed. Max difference = 254 RMSE = 25.363 PSNR = 20.05dB
+
+K=3
+5242880 symbols processed. Max difference = 253 RMSE = 25.642 PSNR = 19.95dB
+
+K=2
+5242880 symbols processed. Max difference = 252 RMSE = 26.541 PSNR = 19.65dB
+
+K=1
+5242880 symbols processed. Max difference = 247 RMSE = 30.468 PSNR = 18.45dB
+
+K=0
+5242880 symbols processed. Max difference = 239 RMSE = 32.244 PSNR = 17.96dB
+
